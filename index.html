@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İptal Kültürü, Beğeni ve Ghosting — Kaynakça &amp; Katkı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EFE6D3;
+    --paper: #F8F2E4;
+    --ink: #2C2717;
+    --muted: #756A50;
+    --accent: #5C6B3E;
+    --accent-deep: #46381F;
+    --brick: #8A4A2C;
+    --line: #D9CBA8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px 64px;}
+
+  header.hero{
+    padding:36px 20px 28px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .hero-text{flex:1;min-width:0;}
+  .emblem{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+    box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--line);
+  }
+  .kicker{font-size:13px;color:var(--accent);margin:0 0 10px;font-weight:600;}
+  h1{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:26px;
+    line-height:1.28;
+    margin:0 0 12px;
+    color:var(--ink);
+    max-width:30ch;
+  }
+  .byline{color:var(--muted);font-size:14.5px;margin:0;}
+
+  nav.tabs{
+    position:sticky;
+    top:0;
+    display:flex;
+    background:var(--bg);
+    border-bottom:1px solid var(--line);
+    z-index:10;
+  }
+  nav.tabs button{
+    flex:1;
+    padding:14px 8px;
+    font-family:'Public Sans', sans-serif;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--muted);
+    background:none;
+    border:none;
+    border-bottom:2px solid transparent;
+    cursor:pointer;
+  }
+  nav.tabs button.active{
+    color:var(--accent-deep);
+    border-bottom-color:var(--brick);
+  }
+
+  section{display:none;padding-top:28px;}
+  section.active{display:block;}
+
+  h2{font-family:'Lora', serif;font-weight:600;font-size:19px;margin:0 0 6px;color:var(--ink);}
+  .section-sub{color:var(--muted);font-size:14px;margin:0 0 22px;}
+
+  .refs{list-style:none;margin:0;padding:0;}
+  .refs li{padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+  .refs li:first-child{padding-top:0;}
+  .refs a{color:var(--accent-deep);word-break:break-word;}
+
+  form{margin-top:4px;}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:18px 0 6px;}
+  label:first-of-type{margin-top:0;}
+  input[type=text], textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:var(--paper);
+    font-family:'Public Sans', sans-serif;
+    font-size:15px;
+    color:var(--ink);
+  }
+  input[type=text]:focus, textarea:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  textarea{min-height:100px;resize:vertical;}
+
+  .submit-btn{
+    margin-top:20px;
+    width:100%;
+    padding:13px;
+    background:var(--accent-deep);
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    font-family:'Public Sans', sans-serif;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .submit-btn:disabled{opacity:0.55;cursor:default;}
+  .submit-btn:hover:not(:disabled){background:var(--accent);}
+
+  .status{font-size:13.5px;margin-top:10px;min-height:18px;}
+  .status.ok{color:#3F6B4A;}
+  .status.err{color:var(--brick);}
+
+  .config-warning{
+    margin-top:18px;
+    padding:12px 14px;
+    background:#F3E4C8;
+    border:1px solid #E0C388;
+    border-radius:4px;
+    font-size:13px;
+    color:#5C4A1F;
+    display:none;
+  }
+  .config-warning.show{display:block;}
+
+  .paper h3{
+    font-family:'Lora', serif;
+    font-weight:600;
+    font-size:17px;
+    margin:26px 0 10px;
+    color:var(--accent-deep);
+  }
+  .paper h3:first-child{margin-top:0;}
+  .paper h4{
+    font-family:'Public Sans', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    margin:20px 0 8px;
+    color:var(--ink);
+  }
+  .paper p{
+    font-size:14.5px;
+    margin:0 0 12px;
+    color:var(--ink);
+  }
+  .paper strong{color:var(--accent-deep);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-top">
+      <img class="emblem" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYE[...]
+      <div class="hero-text">
+        <p class="kicker">Poster ekleri</p>
+        <h1>İptal Kültürü, Beğeni ve Ghosting Fenomenlerine Klinisyen Gözünden Bakış</h1>
+        <p class="byline">Zeynep Hatun Özgökçe</p>
+      </div>
+      <img class="emblem" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYE[...]
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button id="tab-metin" class="active">Araştırma Metni</button>
+    <button id="tab-refs">Kaynakça</button>
+    <button id="tab-contrib">Katkı Bırak</button>
+  </nav>
+
+  <section id="panel-metin" class="active">
+    <h2>Araştırma Metni</h2>
+    <p class="section-sub">Özet, kuramsal çerçeve, yöntem, bulgular ve sonuç.</p>
+    <article class="paper">
+
+      <h3>Özet</h3>
+      <p>Dijitalleşen çağın getirdiği teknolojik dönüşüm, insanı internet ortamında edilgen konumdan çıkarıp etkin bir aktör haline getirmiş ve bireyin psikososyal alanını radik[...]
+
+      <h3>Giriş</h3>
+      <p>Sosyal medya ortamı; nesne ilişkilerinin, kendilik sunumlarının ve erken dönem ruhsal yaralanmaların dijital semboller üzerinden yeniden sahnelendiği modern bir psikolojik labora[...]
+
+      <h4>1. İptal Kültürü (Cancel Culture) ve İlkel Bölme (Splitting)</h4>
+      <p>İptal kavramı, sözlük anlamıyla "yürürlükten kaldırma, bozma veya silme" süreçlerini ifade ederken; kültür kavramı toplumun paylaştığı değerler, inançlar ve semboller[...]
+      <p>Psikanalitik açıdan bakıldığında Melanie Klein (2012), nesne ilişkileri kuramında insanın kişilik yapısının erken dönem anne-bebek ilişkisiyle şekillendiğini savunur. Be[...]
+      <p>Günümüz sosyal medyasında yaşanan keskin kutuplaşmalar, "unfollow" (takibi bırakma) davranışları ve linç kültürü, Klein'ın tanımladığı bu ilkel bölme savunma mekanizm[...]
+
+      <h4>2. Beğeni Odaklı Kendilik Regülasyonu ve Aynalanma (Mirroring)</h4>
+      <p>Goffman'ın dramaturjik benlik yaklaşımında belirttiği gibi, birey sosyal medyada bir "sahne" üzerindedir ve arka plandaki gerçek benliğinden farklı olarak özenle seçilmiş kes[...]
+      <p>Heinz Kohut'un Kendilik Psikolojisi'nde narsisizm, sağlıklı kendilik gelişiminin doğal bir parçası olarak değerlendirilir (Banai vd., 2005; Kohut, 1971). Bebeklik döneminde bire[...]
+
+      <h4>3. Ghosting, Profil Yönetimi ve Sahte Kendilik</h4>
+      <p>"Ghosting" veya Türkçe karşılığıyla "hayaletleme" (Kıvanç, 2022), romantik ya da sosyal ilişkilerde taraflardan birinin tüm iletişimi aniden ve tek taraflı olarak kesip orta[...]
+      <p>James F. Masterson, Terk Depresyonu Kuramı'nda gerçek kendilik ile sahte kendilik arasındaki uyumsuzluğun psikopatolojilere zemin hazırladığını belirtir (Masterson, 1985; Master[...]
+      <p>Dijital ilişkilerdeki ghosting eylemleri ve mükemmellik odaklı profil yönetimleri, Masterson'ın bu kavramsallaştırmasıyla doğrudan ilişkilidir. Birey, incinebilir olan "Gerçek[...]
+
+      <h3>Araştırmanın Amacı ve Önemi</h3>
+      <p>Bu çalışmanın temel amacı; modern dijital davranışların (iptal kültürü, beğeni odaklı onay arayışı, ghosting vb.) psikoterapi seanslarındaki klinik yansımalarını ve v[...]
+
+      <h3>Araştırma Yöntemi</h3>
+      <p>Bu araştırma, modern dijital davranışların klinik seanslardaki yansımalarını ve psikanalitik kuramlar bağlamındaki karşılıklarını derinlemesine incelemek amacıyla nitel a[...]
+
+      <h4>1. Çalışma Grubu / Katılımcılar</h4>
+      <p>Araştırmanın çalışma grubu, nitel araştırmalarda sıklıkla tercih edilen amaçlı örnekleme (purposive sampling) yöntemlerinden biri olan "ölçüt örnekleme" ile belirlenmi[...]
+
+      <h4>2. Veri Toplama Aracı</h4>
+      <p>Verilerin toplanmasında, araştırmacılar tarafından literatür ışığında geliştirilen yarı yapılandırılmış görüşme formu kullanılmıştır. Form; dijital fenomenlerin [...]
+
+      <h4>3. Veri Analizi</h4>
+      <p>Görüşmelerden elde edilen ses kayıtları eksiksiz bir şekilde kelimesi kelimesine deşifre edilmiş ve veriler tematik analiz yöntemiyle incelenmiştir. Tematik analiz sürecinde d[...]
+
+      <h3>Bulgular</h3>
+      <p><strong>İptal Kültürü ve Bölme:</strong> İptal davranışı, Kleinyen bölme ve haset ile açıklanmıştır; ağır formlarının (ifşa) devalüe edici narsisizmle örtüştüğ[...]
+      <p><strong>Beğeni ve Aynalanma:</strong> Beğeni/takipçi sayısının, karşılanmamış aynalanma ihtiyacını (Kohut) telafi ettiği görülmüş; bir klinisyen bunu dopamin döngüsüy[...]
+      <p><strong>Sahte Kendilik:</strong> Filtreli/kusursuz profilin, ayrışma-bireyleşme sürecinde onay görmek için "olması gereken" kimliğe bürünme (Masterson) olduğu bulunmuştur. Ay[...]
+      <p><strong>Ghosting ve Terk Depresyonu:</strong> Ghostlanmanın kişilik yapısına göre çeşitlendiği görülmüştür (narsistik yapıda manipülatif kayboluş; borderline yapıda öfk[...]
+      <p><strong>Genişleyen Kapsam:</strong> Bağımsız olarak üç klinisyen; teşhircilik/röntgencilik ekseninin eklenmesini, terapistin kendi sosyal medya kullanımının formülasyona dahi[...]
+
+      <h3>Sonuç</h3>
+      <p>Altı klinisyenle yapılan görüşmeler, çalışmanın formülasyonunu — iptal/bölme, beğeni/aynalanma, profil yönetimi/sahte kendilik, ghosting/terk depresyonu ilişkilendirmeler[...]
+      <p>Bulgular iki genişletme alanı ortaya koymuştur: 1) sosyal medya davranışlarının teşhircilik/röntgencilik ekseninde de okunması gerektiği; 2) terapistin kendi sosyal medya kull[...]
+      <p>Klinisyenlerin baskın görüşü, yeni bir kurama ihtiyaç olmadığı, mevcut çerçevelerin (nesne ilişkileri, kendilik psikolojisi, terk depresyonu) dijital fenomenleri karşılayac[...]
+
+    </article>
+  </section>
+
+  <section id="panel-refs">
+    <h2>Kaynakça</h2>
+    <p class="section-sub">Posterde geçen tüm kaynakların tam listesi.</p>
+    <ul class="refs" id="refsList"></ul>
+  </section>
+
+  <section id="panel-contrib">
+    <h2>Katkı ve Değerlendirme</h2>
+    <p class="section-sub">Bu çalışma hakkındaki gözlem, soru veya değerlendirmenizi bırakabilirsiniz.</p>
+
+    <form id="contribForm">
+      <label for="name">İsim</label>
+      <input type="text" id="name" name="name" required maxlength="80">
+
+      <label for="institution">E-posta</label>
+      <input type="email" id="institution" name="email" maxlength="120">
+
+      <label for="comment">Yorum</label>
+      <textarea id="comment" name="comment" required maxlength="600"></textarea>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Katkıyı gönder</button>
+      <p class="status" id="formStatus"></p>
+    </form>
+
+    <div class="config-warning" id="configWarning">
+      Form henüz bağlanmadı — aşağıdaki FORM_ENDPOINT değerini kendi Formspree adresinle değiştirmen gerekiyor. Ayrıntı için sayfanın kod yorumlarına bak.
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* =========================================================
+   KURULUM: Bu sayfayı kullanmadan önce aşağıdaki FORM_ENDPOINT
+   değerini kendi Formspree form adresinle değiştir.
+   1) https://formspree.io adresinde ücretsiz hesap aç
+   2) "New Form" ile yeni bir form oluştur
+   3) Sana verilen adres şuna benzer: https://formspree.io/f/xxxxabcd
+   4) O adresi aşağıya yapıştır
+   ========================================================= */
+const FORM_ENDPOINT = "https://formspree.io/f/mppzrbnv";
+
+const REFERENCES = [
+  {text:"Alan, Ü. (2021, 30 Ekim). Sosyal medya anlık işlediği için hemen mahkeme kurulup, yargılamadan infaz da ediliyor… Gazete Kadıköy.", url:"http://www.gazetekadikoy.com.tr/yasam/p[...]
+  {text:"Aydın, M. (2021). Masterson yaklaşımında borderline kişilik bozukluğuna gelişimsel yaklaşım [Yayımlanmamış çalışma]."},
+  {text:"Baker, H. S., & Baker, M. N. (1987). Heinz Kohut's self psychology: An overview. American Journal of Psychiatry, 144(1), 1-9."},
+  {text:"Banai, E., Mikulincer, M., & Shaver, P. R. (2005). \"Selfobject\" needs in Kohut's self psychology: Links with attachment, self-cohesion, affect regulation, and adjustment. Psychoanalyti[...]
+  {text:"Clarkin, J. F., Lenzenweger, M. F., Yeomans, F., Levy, K. N., & Kernberg, O. F. (2007). An object relations model of borderline pathology. Journal of Personality Disorders, 21(5), 474-49[...]
+  {text:"Çakır, P., & Temir, E. (2022). Sosyal medyada benlik sunumu ve mahremiyet kavramı ile ilişkisi: Nicel bir araştırma. Yeni Medya, 13, 205–228."},
+  {text:"Dwyer, C. (2007). Digital relationships in the \"MySpace\" generation: Results from a qualitative study. 40th Annual Hawaii International Conference on System Sciences (HICSS) içinde (s[...]
+  {text:"Karaçelik, H. (2021). Görsel içeriklerin estetik etkisi: Instagram filtre kullanımının beden algısı üzerindeki yansımaları. Bedensel İletişim ve Toplum, 2(2), 15–32."},
+  {text:"Kernberg, O. F. (1967). Borderline personality organization. Journal of the American Psychoanalytic Association, 15(3), 641-685."},
+  {text:"Kernberg, O. F. (1972). Treatment of borderline patients: Tactics and techniques in psychoanalytic therapy. Science House."},
+  {text:"Kırık, A. M. (2020). İnfluencerların takipçileriyle kurduğu etkileşimin sosyal kimlik üzerindeki etkisi. Sosyal Ağlar ve Dijital İletişim Dergisi, 5(2), 41–59."},
+  {text:"Kıvanç, S. (2022). Yakın ilişkilere güncel bir bakış: Çevrimiçi buluşma uygulamaları kullanım motivasyonlarının ilişki sonlandırma stilleri üzerindeki etkisi ve karanlı[...]
+  {text:"Klein, M. (2012). Sevgi, suçluluk ve onarım. Kanat Yayınları."},
+  {text:"Klein, R. (1989). Introduction to the disorders of the self. J. F. Masterson & R. Klein (Ed.), Psychotherapy of the disorders of the self: The Masterson approach içinde (s. 3-23). Brunn[...]
+  {text:"Koessler, R. B., Kohut, T., & Campbell, L. (2019). When your boo becomes a ghost: The association between breakup strategy and breakup role in experiences of relationship dissolution. Co[...]
+  {text:"Kohut, H. (1966). Forms and transformations of narcissism. Journal of the American Psychoanalytic Association, 14(2), 243-272."},
+  {text:"Kohut, H. (1971). The analysis of the self: A systematic approach to the psychoanalytic treatment of narcissistic personality disorders. International Universities Press."},
+  {text:"LeFebvre, L. (2017). Phantom lovers: Ghosting as a relationship dissolution strategy in the technological age. N. M. Punyanunt-Carter & J. S. Wrench (Ed.), Swipe right for love: The impa[...]
+  {text:"Marini, L., & Sembiring, V. R. (2021). Psychological distress of ghosting victims in early adulthood. Psikologia: Jurnal Pemikiran dan Penelitian Psikologi, 16(2), 47-50."},
+  {text:"Masterson, J. F. (1985). The real self: A developmental, self, and object relations approach. Brunner/Mazel."},
+  {text:"Masterson, J. F., & Klein, R. (1989). Psychotherapy of the disorders of the self: The Masterson approach. Brunner/Mazel."},
+  {text:"Özakkaş, T. (2018). Alan kuramının diğer psikanalitik kuramlarla ilişkisi. Türkiye Bütüncül Psikoterapi Dergisi, 1(2), 1-28."},
+  {text:"Siegel, A. M. (1996). Heinz Kohut and the psychology of the self. Routledge."},
+  {text:"Sulymka, S. I. (2022). What makes a ghoster? [Doktora tezi, University of Regina]. Institutional Repository."},
+  {text:"Yıldız, H. N. (2022). Kültür ve reklam ilişkisi. Manas Sosyal Araştırmalar Dergisi, 11(1), 293-308.", url:"https://doi.org/10.33206/mjss.886628"}
+];
+
+const refsList = document.getElementById('refsList');
+REFERENCES.forEach(r=>{
+  const li = document.createElement('li');
+  li.textContent = r.text + (r.url ? ' ' : '');
+  if(r.url){
+    const a = document.createElement('a');
+    a.href = r.url; a.textContent = r.url; a.target = '_blank'; a.rel='noopener';
+    li.appendChild(a);
+  }
+  refsList.appendChild(li);
+});
+
+// tabs
+const tabMetin = document.getElementById('tab-metin');
+const tabRefs = document.getElementById('tab-refs');
+const tabContrib = document.getElementById('tab-contrib');
+const panelMetin = document.getElementById('panel-metin');
+const panelRefs = document.getElementById('panel-refs');
+const panelContrib = document.getElementById('panel-contrib');
+
+const tabs = [
+  {btn: tabMetin, panel: panelMetin},
+  {btn: tabRefs, panel: panelRefs},
+  {btn: tabContrib, panel: panelContrib}
+];
+
+function activateTab(target){
+  tabs.forEach(t=>{
+    const active = t.btn === target.btn;
+    t.btn.classList.toggle('active', active);
+    t.panel.classList.toggle('active', active);
+  });
+}
+
+tabMetin.onclick = () => activateTab(tabs[0]);
+tabRefs.onclick = () => activateTab(tabs[1]);
+tabContrib.onclick = () => {
+  activateTab(tabs[2]);
+  if(FORM_ENDPOINT.includes('REPLACE_ME')){
+    document.getElementById('configWarning').classList.add('show');
+  }
+};
+
+const form = document.getElementById('contribForm');
+const submitBtn = document.getElementById('submitBtn');
+const formStatus = document.getElementById('formStatus');
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  if(FORM_ENDPOINT.includes('REPLACE_ME')){
+    formStatus.textContent = 'Form henüz bağlanmadı (bkz. yukarıdaki uyarı).';
+    formStatus.className = 'status err';
+    return;
+  }
+  const name = document.getElementById('name').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+  if(!name || !comment){
+    formStatus.textContent = 'İsim ve yorum alanları zorunlu.';
+    formStatus.className = 'status err';
+    return;
+  }
+  submitBtn.disabled = true;
+  formStatus.textContent = 'Gönderiliyor…';
+  formStatus.className = 'status';
+  try{
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+    if(res.ok){
+      formStatus.textContent = 'Katkınız için teşekkürler.';
+      formStatus.className = 'status ok';
+      form.reset();
+    } else {
+      throw new Error('submit failed');
+    }
+  }catch(err){
+    formStatus.textContent = 'Gönderilemedi, lütfen tekrar deneyin.';
+    formStatus.className = 'status err';
+  }finally{
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
